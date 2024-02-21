@@ -104,7 +104,7 @@ if __name__ == "__main__":
     models_to_test = [('SimpleCNN', hyperparameters_simplecnn), ('CNNModel2', hyperparameters_cnnmodel2)]
     # models_to_test = [('CNNModel2', hyperparameters_cnnmodel2)]
     
-    experiments_per_model = 8  # Define how many experiments to run for each model
+    experiments_per_model = 8
 
     for model_name, hyperparams_space in models_to_test:
         # print(model_name, hyperparams_space)

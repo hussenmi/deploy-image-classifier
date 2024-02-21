@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload an Image for Prediction</h2>
+        <form action="/predict" method="post" enctype="multipart/form-data" class="form-upload">
+            <input type="file" name="image" required>
+            <input type="submit" value="Upload">
+        </form>
+        {% if prediction %}
+            <div class="prediction">Predicted class: {{ prediction }}</div>
+            <img class="predicted-image" src="{{ url_for('static', filename=image_name) }}" alt="Uploaded Image" style="width:300px; height:300px;">
+        {% endif %}
+
+    </div>
+</body>
+</html>

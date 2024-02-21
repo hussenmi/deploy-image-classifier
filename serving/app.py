@@ -14,6 +14,7 @@ model_path = 'training/model_weights/CNNModel2_lr0.001_momentum0.99_epochs10.pth
 model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 model.eval()
 
+
 # Define the transform for input images
 transform = transforms.Compose([
     transforms.Resize((32, 32)),

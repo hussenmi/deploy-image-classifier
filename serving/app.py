@@ -11,9 +11,6 @@ app = Flask(__name__)
 # Load the model
 model = CNNModel2()
 model_path = 'training/model_weights/CNNModel2_lr0.001_momentum0.99_epochs10.pth'
-# training/model_weights
-# list all the files in the directory
-# print(os.listdir('../training/model_weights'))
 model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 model.eval()
 
@@ -24,7 +21,6 @@ transform = transforms.Compose([
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
 ])
 
-# Ensure the uploads directory exists
 uploads_dir = os.path.join(app.static_folder, 'uploads')
 os.makedirs(uploads_dir, exist_ok=True)
 
@@ -37,10 +33,10 @@ def predict():
         if file:
             filename = secure_filename(file.filename)
             save_path = os.path.join(uploads_dir, filename)
-            file.save(save_path)  # Save the uploaded image
+            file.save(save_path)
             
             image = Image.open(save_path)
-            image_tensor = transform(image).unsqueeze(0)  # Preprocess the image
+            image_tensor = transform(image).unsqueeze(0)
 
             # Make prediction
             with torch.no_grad():
@@ -50,7 +46,7 @@ def predict():
             classes = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
             predicted_class = classes[predicted.item()]
 
-            # Check if request is from curl or similar tool
+            # Check if request is from curl or similar tool. If so, we just return the prediction as JSON.
             if 'curl' in request.headers.get('User-Agent', ''):
                 return jsonify({'prediction': predicted_class})
             else:

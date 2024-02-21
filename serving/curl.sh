@@ -4,7 +4,7 @@
 URL="http://localhost:5000/predict"
 
 # Replace with the path to the image you want to upload
-IMAGE_PATH="cifar_images/cifar_sample_ship_8.png"
+IMAGE_PATH="cifar_images/cifar_sample_truck_1.png"
 
 # Perform the HTTP POST request
 curl -X POST -F "image=@$IMAGE_PATH" $URL
